@@ -6,6 +6,11 @@ resource "aws_instance" "gitlab" {
   ami           = var.ami_id
   instance_type = var.instance_type
   key_name      = var.key_name
+  
+  root_block_device {
+    volume_size = 30  # Set the root volume size to 30 GB
+    volume_type = "gp2"  # General Purpose SSD
+  }
 
   user_data = <<-EOF
               #!/bin/bash
